@@ -1,7 +1,8 @@
 import { getAllFilesSync } from "get-all-files";
 import path = require("path");
 import { OutputChannel, Uri, window, workspace } from "vscode";
-import { GatesProvider } from "../gate-provider";
+import { File } from "../tree item classes/file";
+
 
 export class GateFunctions {
 
@@ -26,6 +27,13 @@ export class GateFunctions {
 
     public appendLineToOutputChannel(outputChannel: OutputChannel, message: string) {
         outputChannel.appendLine(message);
+    }
+
+    public writeResultsToOutput(results: File, outputChannel: OutputChannel) {
+        this.appendLineToOutputChannel(outputChannel, "in file: " + results.fileName + " /n");
+        results.results.forEach((item) => {
+            this.appendLineToOutputChannel(outputChannel, item.message);
+        });
     }
 
 

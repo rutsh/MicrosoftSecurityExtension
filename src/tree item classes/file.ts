@@ -24,11 +24,10 @@ export class File extends TreeItem {
 
   }
 
-  public resultsList: GateResult[] = this.results;
 
   public getMoreChildren(element?: vscode.TreeDataProvider<TreeItem> | undefined): Thenable<TreeItem[]> {
     let path = this.path;
-    return Promise.resolve(this.resultsList.map(function (r) {
+    return Promise.resolve(this.results.map(function (r) {
       return new MessageItem(r.message, r.location, path);
     }));
   }

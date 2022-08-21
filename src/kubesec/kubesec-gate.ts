@@ -19,8 +19,6 @@ export class KubesecGate extends Gate {
 
     super("Kubesec", vscode.TreeItemCollapsibleState.Collapsed, 'kubesec', isActive);
     kubesec().then(data=>this.data=data);
-
-    //super("Kubesec", vscode.TreeItemCollapsibleState.Collapsed, 'gates.refreshEntry', isActive, 'kubesec');
     this.listenerSaveEvent();
   }
   getTreeItem(element: File): vscode.TreeItem {
