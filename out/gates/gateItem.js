@@ -33,13 +33,13 @@ class MyGate extends customer_gate_1.CustomGate {
         });
         this.myData = new gate_data_1.GateData();
         this.myData.data = [];
-        this.myData.data.push(new gate_data_1.ResultsList("critical", [new gate_data_1.FileMessages("C:/Users/user1/.vscode/extensions/MicrosoftSecurityExtension-main/src/yaml files/criti.yaml", "criti.yaml", [new gate_data_1.GateResult(new gate_data_1.Location(4), "very bad problem")])]));
+        this.myData.data.push(new gate_data_1.ResultsList("critical", [new gate_data_1.FileMessages("C:/Users/user1/.vscode/extensions/MicrosoftSecurityExtension/src/yaml files/criti.yaml", "criti.yaml", [new gate_data_1.GateResult(new gate_data_1.Location(4), "very bad problem")])]));
         return this.myData;
     }
     async getKubesec() {
         let _kubesecResults = [];
         let myFiles = [];
-        myFiles = await this.getFiles(new gate_functions_1.GetFileSettings(".yaml"));
+        myFiles = await this.getFiles(new gate_functions_1.GetFileSettings([".yaml"]));
         for (const file of myFiles) {
             //  appendLineToOutputChannel(MDCOutputChannel,"send "+file+" file for checking");
             const myFile = (0, fs_1.readFileSync)(file, 'utf-8');

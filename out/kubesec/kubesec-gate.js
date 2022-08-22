@@ -13,7 +13,6 @@ class KubesecGate extends gate_1.Gate {
         this.isActive = isActive;
         this.data = [];
         (0, kubesec_1.kubesec)().then(data => this.data = data);
-        //super("Kubesec", vscode.TreeItemCollapsibleState.Collapsed, 'gates.refreshEntry', isActive, 'kubesec');
         this.listenerSaveEvent();
     }
     getTreeItem(element) {

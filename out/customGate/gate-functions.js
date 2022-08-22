@@ -5,13 +5,15 @@ const get_all_files_1 = require("get-all-files");
 const vscode_1 = require("vscode");
 class GateFunctions {
     async getFiles(searchSettings, files) {
-        var _files = [];
+        let _files = [];
         let myPath = vscode_1.workspace.workspaceFolders?.map(elem => elem.uri.fsPath);
         myPath === undefined ? myPath = [] : null;
-        for (const path of searchSettings.pathToSearch ? searchSettings.pathToSearch : myPath) {
-            for (const filename of files?.length > 0 ? files : (0, get_all_files_1.getAllFilesSync)(path)) {
-                if (filename.endsWith(searchSettings.fileExtension)) {
-                    _files.push(filename);
+        for (let path of searchSettings.pathToSearch ? searchSettings.pathToSearch : myPath) {
+            for (let filename of files?.length > 0 ? files : (0, get_all_files_1.getAllFilesSync)(path)) {
+                for (let fileExtension of searchSettings.fileExtension) {
+                    if (filename.endsWith(fileExtension)) {
+                        _files.push(filename);
+                    }
                 }
             }
         }
@@ -23,6 +25,12 @@ class GateFunctions {
     }
     appendLineToOutputChannel(outputChannel, message) {
         outputChannel.appendLine(message);
+    }
+    writeResultsToOutput(results, outputChannel) {
+        this.appendLineToOutputChannel(outputChannel, "in file: " + results.fileName + " /n");
+        results.results.forEach((item) => {
+            this.appendLineToOutputChannel(outputChannel, item.message);
+        });
     }
 }
 exports.GateFunctions = GateFunctions;

@@ -67,9 +67,10 @@ function writeResultsToOutput(results, MDCOutputChannel) {
     //         });
     //     }
     // }
-    results.data.forEach((result) => {
+    appendLineToOutputChannel(MDCOutputChannel, "in file: " + results.fileName + " /n");
+    results.results.forEach((item) => {
+        appendLineToOutputChannel(MDCOutputChannel, item.message);
     });
-    //appendLineToOutputChannel(MDCOutputChannel, "kubesec result:\n" + message + scoringResult);
 }
 exports.writeResultsToOutput = writeResultsToOutput;
 async function getFiles() {

@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import { GateResult } from '../customGate/gate-data';
-import { kubesec } from '../kubesec/kubesec';
 import { MessageItem } from './message';
 import { TreeItem } from './tree-item';
 

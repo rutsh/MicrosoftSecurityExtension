@@ -11,7 +11,7 @@ import { GateFunctions, GetFileSettings } from "./gate-functions";
 
 
 
-
+//After implementing the gate, a name and path must be added to the file gateList.json
 
 //abstract class for generic gates
 export abstract class CustomGate extends Gate {
@@ -130,7 +130,7 @@ export abstract class CustomGate extends Gate {
 }
 
 
-//After implementing the gate, a name and path must be added to the file gateList.json
+
 
 
 

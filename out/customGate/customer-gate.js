@@ -5,6 +5,7 @@ const vscode_1 = require("vscode");
 const category_1 = require("../tree item classes/category");
 const gate_1 = require("../tree item classes/gate");
 const gate_functions_1 = require("./gate-functions");
+//After implementing the gate, a name and path must be added to the file gateList.json
 //abstract class for generic gates
 class CustomGate extends gate_1.Gate {
     constructor(contextValue = "gate", label = "custom", isActive = false) {
@@ -81,6 +82,9 @@ class CustomGate extends gate_1.Gate {
     //This function write to output channel
     appendLineToOutputChannel(outputChannel, message) {
         this.functions.appendLineToOutputChannel(outputChannel, message);
+    }
+    writeResultsToOutput(results, outputChannel) {
+        this.functions.writeResultsToOutput(results, outputChannel);
     }
 }
 exports.CustomGate = CustomGate;

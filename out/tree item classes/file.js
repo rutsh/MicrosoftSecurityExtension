@@ -17,12 +17,11 @@ class File extends tree_item_1.TreeItem {
         this.collapsibleState = collapsibleState;
         this.results = results;
         this.command = command;
-        this.resultsList = this.results;
         this.command = command;
     }
     getMoreChildren(element) {
         let path = this.path;
-        return Promise.resolve(this.resultsList.map(function (r) {
+        return Promise.resolve(this.results.map(function (r) {
             return new message_1.MessageItem(r.message, r.location, path);
         }));
     }
