@@ -1,4 +1,6 @@
+import { isStringObject } from 'util/types';
 import * as vscode from 'vscode';
+import { Location } from './customGate/gate-data';
 import { GatesProvider } from './gate-provider';
 import { KubesecGate } from './kubesec/kubesec-gate';
 import { jumpSpecifiedLine, showTextDocumentWithErrors } from './ShowFileYaml';
@@ -20,7 +22,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
   vscode.commands.registerCommand('gates.refreshEntry', () =>
     myGates.refresh()
- 
+
   );
 
   vscode.commands.registerCommand('gates.activate', () => {
@@ -34,7 +36,7 @@ export async function activate(context: vscode.ExtensionContext) {
     await vscode.window.showTextDocument(textDocument);
   });
 
-  vscode.commands.registerCommand('customGate.showData', async (arg,item) => {
+  vscode.commands.registerCommand('customGate.showData', async (arg, item) => {
     const filePath = arg;
     const textDocument = await vscode.workspace.openTextDocument(filePath);
     await vscode.window.showTextDocument(textDocument);
@@ -47,10 +49,10 @@ export async function activate(context: vscode.ExtensionContext) {
   });
 
   vscode.commands.registerCommand('customGate.activate', async (arg) => {
-    arg.activate();
-    arg.contextValue ="anyGate";
-    vscode.commands.executeCommand('setContext','anyGateActive', true);
+    arg.contextValue = "anyGate";
+    vscode.commands.executeCommand('setContext', 'anyGateActive', true);
     myGates.refresh();
+    arg.activate();
     vscode.window.showInformationMessage(arg.label + '.activate');
   });
 
@@ -71,7 +73,12 @@ export async function activate(context: vscode.ExtensionContext) {
   vscode.commands.registerCommand('customGate.showFileData', async (args, arg: MessageItem) => {
     const textDocument = await vscode.workspace.openTextDocument(args);
     await vscode.window.showTextDocument(textDocument);
-    jumpSpecifiedLine(arg.location.lineNumber - 1, args);
+    if (typeof (arg.location) === typeof (Location)) {
+      jumpSpecifiedLine((arg.location as Location).lineNumber - 1, args);
+    }
+    else {
+      vscode.env.openExternal(vscode.Uri.parse(arg.location.toString()));
+    }
 
   });
 

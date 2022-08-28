@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deactivate = exports.activate = void 0;
 const vscode = require("vscode");
+const gate_data_1 = require("./customGate/gate-data");
 const gate_provider_1 = require("./gate-provider");
 const ShowFileYaml_1 = require("./ShowFileYaml");
 async function activate(context) {
@@ -29,10 +30,10 @@ async function activate(context) {
         vscode.window.showInformationMessage('kubesec.activate');
     });
     vscode.commands.registerCommand('customGate.activate', async (arg) => {
-        arg.activate();
         arg.contextValue = "anyGate";
         vscode.commands.executeCommand('setContext', 'anyGateActive', true);
         myGates.refresh();
+        arg.activate();
         vscode.window.showInformationMessage(arg.label + '.activate');
     });
     vscode.commands.registerCommand('kubesec.deactivate', async (arg) => {
@@ -49,7 +50,12 @@ async function activate(context) {
     vscode.commands.registerCommand('customGate.showFileData', async (args, arg) => {
         const textDocument = await vscode.workspace.openTextDocument(args);
         await vscode.window.showTextDocument(textDocument);
-        (0, ShowFileYaml_1.jumpSpecifiedLine)(arg.location.lineNumber - 1, args);
+        if (typeof (arg.location) === typeof (gate_data_1.Location)) {
+            (0, ShowFileYaml_1.jumpSpecifiedLine)(arg.location.lineNumber - 1, args);
+        }
+        else {
+            vscode.env.openExternal(vscode.Uri.parse(arg.location.toString()));
+        }
     });
 }
 exports.activate = activate;

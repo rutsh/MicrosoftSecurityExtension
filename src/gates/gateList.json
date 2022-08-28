@@ -6,5 +6,9 @@
     {
         "path":"./gates/myGate",
         "name":"Gate2"
+    },
+    {
+        "path":"./gates/retireGate",
+        "name":"RetireGate"
     }
 ]

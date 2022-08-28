@@ -80,7 +80,7 @@ export function writeResultsToOutput(results: File, MDCOutputChannel: vscode.Out
 
 export async function getFiles() {
     var _files = [];
-    for (const filename of getAllFilesSync('C:\\Users\\user1\\.vscode\\extensions\\MicrosoftSecurityExtension-main')) {
+    for (const filename of getAllFilesSync('C:\\Users\\user1\\.vscode\\extensions\\MicrosoftSecurityExtension')) {
         if (filename.endsWith(fileType)) {
             _files.push(filename);
         }

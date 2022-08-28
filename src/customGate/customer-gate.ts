@@ -35,11 +35,8 @@ export abstract class CustomGate extends Gate {
     //Set functions for generic gate
     private functions = new GateFunctions();
 
-    abstract contextValue?: string | undefined;
-
     constructor(contextValue: string = "gate", label: string = "custom", isActive: boolean = false) {
         super(label, TreeItemCollapsibleState.Collapsed, contextValue, isActive);
-
     }
 
 
